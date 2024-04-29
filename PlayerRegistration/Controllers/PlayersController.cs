@@ -9,7 +9,7 @@ public class PlayersController : ControllerBase
 {
     private readonly IBusinessLogicService _businessLogicService;
 
-    public PlayersController(IBusinessLogicService businessLogicService)
+    public PlayersController(IBusinessLogicService businessLogicService, ILogger<PlayersController> logger)
     {
         _businessLogicService = businessLogicService;
     }
@@ -19,8 +19,11 @@ public class PlayersController : ControllerBase
     {
         try
         {
+            if (body.File == null)
+                return BadRequest("File is required.");
+
             _businessLogicService.Handle(body.File);
-            return Ok();
+            return NoContent();
         }
         catch (Exception e)
         {

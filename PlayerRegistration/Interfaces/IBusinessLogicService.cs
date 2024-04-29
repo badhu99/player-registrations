@@ -2,7 +2,7 @@
 
 namespace PlayerRegistration.Interfaces;
 
-public interface IReaderService
+public interface IBusinessLogicService
 {
-    public List<Player> Read(IFormFile formFile);
+    public void Handle(IFormFile file);
 }
